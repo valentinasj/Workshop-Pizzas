@@ -5,22 +5,30 @@ import Logo from "../../imgs/logo.png";
 
 export const Login = () => {
   return (
-    <>
-     <div className="mainLogin">
+    <main>
+      <div className="mainLogin">
         <div className="mainLogin__logo">
-         <figure>
-           <img src={Logo}></img>
-         </figure>
-         <span>PiSassScript</span>
+          <figure>
+            <img src={Logo} alt="Logo" />
+          </figure>
+          <span className="mainLogin__logoName">PiSassScript</span>
         </div>
         <div className="mainLogin__maintext">
           <h5 className="mainLogin__maintitle">Inicia sesión en tu cuenta</h5>
-          <p className="mainLogin__text">Disfruta de la mejor Pizza creada para las personas amantes del Código. </p>
+          <br />
+          <p className="mainLogin__text">
+            Disfruta de la mejor Pizza creada para las personas amantes del Código.
+          </p>
         </div>
         <div>
-          <LoginForm/>
+          <LoginForm />
+        </div>
+        <div className="mainLogin__footer">
+          <span className="mainLogin__footerText">¿No tienes una cuenta?</span>
+          <span className="mainLogin__footerLink">Regístrate aquí</span>
         </div>
       </div>
-    </>
+    </main>
   );
 };
+
