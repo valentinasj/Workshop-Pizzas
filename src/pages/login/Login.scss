@@ -1,0 +1,43 @@
+@import '../../index.scss';
+
+.mainLogin{
+   width: 100vw;
+    height: 100%;
+   background-image: url(../../imgs/background.jpg);
+   background-repeat: no-repeat;
+   background-size:cover;
+   position: absolute;
+   top: 0;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding: 0px 20px;
+
+   &__logo{
+      display: flex;
+    flex-direction: column;
+    align-items: center;
+      img{
+         width: 250px;
+         height: 230px;
+         
+      }
+   }
+
+   &__maintitle{
+      font-family: 'Inter', sans-serif;
+      color:  var(--white);
+      font: var(  --headline2);
+   }
+
+   &__maintext{
+      display: flex;
+      flex-direction: column; 
+      font: var(--body2-regular);
+      color: var(--white);
+   }
+   
+}
+// .mainLoginBackground{
+ 
+// }

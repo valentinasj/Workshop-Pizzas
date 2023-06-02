@@ -1,0 +1,16 @@
+@import '../../../index.scss';
+.main{
+display: flex;
+flex-direction: column;
+align-items: center;
+align-content: center;
+    &__restablecer{
+        font: var(--body2-regular);
+        color: var(--white);
+    }
+    &__form{
+        width: 60vw;
+    }
+
+
+}
