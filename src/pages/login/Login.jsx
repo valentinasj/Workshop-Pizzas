@@ -2,6 +2,8 @@ import React from "react";
 import LoginForm from "../../components/login/loginForm/LoginForm";
 import "./Login.scss";
 import Logo from "../../imgs/logo.png";
+import { Link } from "react-router-dom";
+
 
 export const Login = () => {
   return (
@@ -25,7 +27,9 @@ export const Login = () => {
         </div>
         <div className="mainLogin__footer">
           <span className="mainLogin__footerText">¿No tienes una cuenta?</span>
+          <Link to="/register">
           <span className="mainLogin__footerLink">Regístrate aquí</span>
+          </Link>
         </div>
       </div>
     </main>
