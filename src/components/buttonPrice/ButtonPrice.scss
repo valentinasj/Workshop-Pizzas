@@ -1,0 +1,26 @@
+@import '../../index.scss';
+
+.buttonPrice{
+    background-color: var(--primary);
+    border: 0px;
+    color: var(--white);
+    border-radius: 100px;
+    width: 120px;
+    height: 40px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5px;
+
+    
+    &__price{
+        font: var(--body2-bold);
+        
+    }
+    &__currency{
+        font: var(--body2-regular);
+        opacity: 0.8;
+    }
+        
+}

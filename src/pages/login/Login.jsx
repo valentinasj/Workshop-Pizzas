@@ -4,7 +4,6 @@ import "./Login.scss";
 import Logo from "../../imgs/logo.png";
 import { Link } from "react-router-dom";
 
-
 export const Login = () => {
   return (
     <main>

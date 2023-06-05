@@ -13,16 +13,17 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout />}>
           <Route path="/" element={<Login />} />
           {/* <Route path="login" Component={Login} /> */}
           <Route path="register" Component={Register} />
+        <Route element={<Layout />}>
+          <Route path="home" Component={Home}/>
           <Route path="search" Component={Search} />
+        </Route>
           <Route path="details" Component={Details} />
           <Route path="cart" Component={Cart} />
           <Route path="payment" Component={Paymentpage} />
-          <Route path="/" element={<Navigate to="/Home" />} />
-        </Route>
+          {/* <Route path="/" element={<Navigate to="/Home" />} /> */}
       </Routes>
     </BrowserRouter>
   );

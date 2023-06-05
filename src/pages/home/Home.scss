@@ -1,0 +1,45 @@
+@import "../../index.scss";
+
+.mainHome {
+  margin: 0px 20px;
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__pizzas {
+    display: flex;
+    gap: 50px;
+    font: var(--body1-bold);
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &__coupons {
+    display: flex;
+    justify-content: space-around;
+    font: var(--body2-bold);
+  }
+
+  &__foodCards {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.seeAll {
+  font: var(--body1-bold);
+  color: var(--primary);
+}
+
+.foodCards__container {
+  overflow-y: auto; /* Enable vertical scrolling */
+  scroll-behavior: smooth; /* Add smooth scrolling animation */
+  max-height: 80vh; /* Set the desired maximum height for the container */
+}
+
+.foodCard {
+  width: 100%; /* Set the width of each FoodCard component to fill the container */
+  margin-bottom: 10px; /* Add spacing between the cards */
+}

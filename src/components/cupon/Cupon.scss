@@ -1,0 +1,12 @@
+.cupon{
+    background-image: url('../../imgs/cupon.png');
+    background-size: contain;
+    width: 250px;
+    height: 250px;
+    display: flex;
+    position: inherit;
+    &__info{
+       
+        display: flex;
+    }
+}
