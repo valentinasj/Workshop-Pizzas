@@ -19,7 +19,7 @@
 
   &__coupons {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     font: var(--body2-bold);
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
