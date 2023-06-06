@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, createContext} from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Layout } from "../components/layout/Layout";
 import { Login } from "../pages/login/Login";
@@ -9,9 +9,19 @@ import { Cart } from "../pages/cart/Cart";
 import { Paymentpage } from "../pages/paymentpage/Paymentpage";
 import { Home } from "../pages/home/Home";
 
+export const UserContext = createContext({});
+
 const AppRouter = () => {
+  const [registerValues, setRegisterValues] = useState({}); 
+  
   return (
     <BrowserRouter>
+      <UserContext.Provider value={{
+       registerValues,
+       setRegisterValues
+            }}
+          >
+
       <Routes>
           <Route path="/" element={<Login />} />
           {/* <Route path="login" Component={Login} /> */}
@@ -25,6 +35,7 @@ const AppRouter = () => {
           <Route path="payment" Component={Paymentpage} />
           {/* <Route path="/" element={<Navigate to="/Home" />} /> */}
       </Routes>
+          </UserContext.Provider>
     </BrowserRouter>
   );
 };

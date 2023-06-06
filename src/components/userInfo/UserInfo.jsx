@@ -1,13 +1,21 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import './UserInfo.scss';
 import Person from '../../imgs/person2.png';
+// import { UserContext } from '../../routes/AppRouter';
 
-const UserInfo = ({user}) => {
+const UserInfo = () => {
+  // const { registerValues } = useContext(UserContext);
+  
+  // useEffect(()=> {
+  //   console.log(registerValues)
+  // },[])
+
+
   return (
     <div className='mainUser'>
         <div className='mainUser__title'>
             <h5 className='mainUser__page'>Home</h5>
-            <span className='mainUser__userSalute'>Que bueno verte {user}!</span>
+            <span className='mainUser__userSalute'>Que bueno verte {registerValues.username}!</span>
         </div>
         <div className='mainUser__profile'>
             <figure>
