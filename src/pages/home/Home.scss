@@ -6,6 +6,7 @@
   &__section {
     display: flex;
     flex-direction: column;
+    overflow-x: auto;
   }
 
   &__pizzas {
@@ -18,8 +19,19 @@
 
   &__coupons {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     font: var(--body2-bold);
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+
+    .coupon {
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      animation: slide 10s linear infinite;
+      margin-right: 20px;
+      // Agrega aquí los estilos adicionales para los cupones
+    }
   }
 
   &__foodCards {
@@ -42,4 +54,13 @@
 .foodCard {
   width: 100%; /* Set the width of each FoodCard component to fill the container */
   margin-bottom: 10px; /* Add spacing between the cards */
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }

@@ -1,17 +1,18 @@
-import React from 'react';
-import './Cupon.scss';
+import React from "react";
+import "./Cupon.scss";
 
-const Cupon = () => {
+const Cupon = ({name, discount}) => {
   return (
-    <section className='cuponBg'>
-    <div className='cupon'>
-        <div className='cupon__info'>
-            <span className='cupon__name'>Cupon para Frontends</span>
-            <span className='cupon__discount'>45% OFF</span>
+    <div class="coupon">
+      <div class="coupon__tag">✶ Coupon ✶</div>
+      <div class="coupon__body">
+        <div class="coupon__title">{name}</div>
+        <div class="coupon__value">
+          <strong>{discount}</strong>
         </div>
+      </div>
     </div>
-    </section>
-  )
-}
+  );
+};
 
-export default Cupon
+export default Cupon;

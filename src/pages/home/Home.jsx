@@ -13,7 +13,9 @@ export const Home = () => {
           <span className="seeAll">Ver todas</span>
         </div>
         <div className="mainHome__coupons">
-          {/* <Cupon/> */}
+          <Cupon name='Cupon para Front Ends' discount='45% OFF'/>
+          <Cupon name='Cupon Pizza CSS' discount='25% OFF'/>
+          <Cupon name='Cupon Pizza JavaScript' discount='10% OFF'/>
         </div>
       </section>
       <section className="mainHome__foodCards">
