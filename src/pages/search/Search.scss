@@ -1,0 +1,50 @@
+@import "../../index.scss";
+
+.mainSearch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: -1;
+  position: relative;
+  background-color: transparent;
+  transform: translateY(65px);
+
+  &__image {
+    img {
+      width: 130px;
+      height: 130px;
+      transform: translateY(-30px);
+      transform: rotate(225deg);
+      margin: 30px;
+      filter: invert(62%) sepia(8%) saturate(17%) hue-rotate(319deg) brightness(91%) contrast(87%);
+        opacity: 0.7;
+    }
+  }
+  &__words {
+    opacity: 0.7;
+    font: var(--body1-regular);
+    font-size: 1.2rem;
+    color: var(--grey);
+  }
+}
+
+.mainSearchBar{
+    z-index: 0;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px 20px;
+    gap: 20px;
+    width: 100vw;
+    &__cards{
+        display: flex;
+    flex-direction: column;
+    }
+    &__container{
+      overflow-y: auto; /* Enable vertical scrolling */
+      scroll-behavior: smooth; /* Add smooth scrolling animation */
+      max-height: 70vh; /* Set the desired maximum height for the container */
+    }
+}
