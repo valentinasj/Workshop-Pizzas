@@ -12,13 +12,13 @@ import { Home } from "../pages/home/Home";
 export const UserContext = createContext({});
 
 const AppRouter = () => {
-  const [registerValues, setRegisterValues] = useState({}); 
+  const [userValues, setUserValues] = useState({}); 
   
   return (
     <BrowserRouter>
       <UserContext.Provider value={{
-       registerValues,
-       setRegisterValues
+       userValues,
+       setUserValues
             }}
           >
 

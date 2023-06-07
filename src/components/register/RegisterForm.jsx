@@ -13,7 +13,7 @@ const API_USER = 'https://pizza-api-production.up.railway.app/users';
 
 const RegisterForm = () => {
   const navigate = useNavigate();
-  const {setRegisterValues} = useContext(UserContext);
+  const {setUserValues} = useContext(UserContext);
 
   const schema = Yup.object().shape({
     email: Yup.string()
@@ -33,7 +33,7 @@ const RegisterForm = () => {
     .post(API_USER, values)
     .then((response) => {
       console.log(response.data);
-      setRegisterValues(values); 
+      setUserValues(values); 
         // Aquí puedes realizar acciones adicionales después de registrar el usuario
         navigate("/home"); // Ejemplo: redirigir a una página de éxito
       })

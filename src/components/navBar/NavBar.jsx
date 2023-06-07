@@ -10,6 +10,7 @@ import search from "../../imgs/buscar.svg";
 import basket from "../../imgs/basket.svg";
 import { Link } from "react-router-dom";
 
+
 const NavBar = () => {
 
 
