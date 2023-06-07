@@ -5,7 +5,6 @@ import { UserContext } from '../../routes/AppRouter';
 
 const UserInfo = () => {
   const { userValues } = useContext(UserContext);
-  
   useEffect(()=> {
     console.log(userValues)
   },[])

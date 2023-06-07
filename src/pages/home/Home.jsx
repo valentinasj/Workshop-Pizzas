@@ -19,9 +19,7 @@ export const Home = () => {
         </div>
       </section>
       <section className="mainHome__foodCards">
-          <FoodCard imageUrl={PizzaOne} />
-          <FoodCard imageUrl={PizzaOne} />
-          <FoodCard imageUrl={PizzaOne} />
+          <FoodCard/>
       </section>
         </div>
     </main>

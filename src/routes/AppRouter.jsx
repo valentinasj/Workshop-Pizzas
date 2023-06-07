@@ -13,12 +13,15 @@ export const UserContext = createContext({});
 
 const AppRouter = () => {
   const [userValues, setUserValues] = useState({}); 
+  const [pizzaValues, setPizzaValues] = useState([]);
   
   return (
     <BrowserRouter>
       <UserContext.Provider value={{
        userValues,
-       setUserValues
+       setUserValues,
+       pizzaValues,
+       setPizzaValues
             }}
           >
 

@@ -16,10 +16,6 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const {setUserValues} = useContext(UserContext);
 
-  useEffect(()=> {
-  
-  },[])
-
   const schema = Yup.object().shape({
     username: Yup.string()
       .required("Un usuario debe ser suministrado")
