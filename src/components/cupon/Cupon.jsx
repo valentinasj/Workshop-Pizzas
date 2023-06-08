@@ -3,11 +3,11 @@ import "./Cupon.scss";
 
 const Cupon = ({name, discount}) => {
   return (
-    <div class="coupon">
-      <div class="coupon__tag">✶ Coupon ✶</div>
-      <div class="coupon__body">
-        <div class="coupon__title">{name}</div>
-        <div class="coupon__value">
+    <div className="coupon">
+      <div className="coupon__tag">✶ Coupon ✶</div>
+      <div className="coupon__body">
+        <div className="coupon__title">{name}</div>
+        <div className="coupon__value">
           <strong>{discount}</strong>
         </div>
       </div>

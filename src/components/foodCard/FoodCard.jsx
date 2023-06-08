@@ -7,20 +7,22 @@ import { UserContext } from '../../routes/AppRouter';
 
 const API_FOOD = 'https://pizza-api-production.up.railway.app/pizzas';
 
-const FoodCard = ({ imageUrl }) => {
+const FoodCard = () => {
   const [currentIndexArray, setCurrentIndexArray] = useState([]);
   const { pizzaValues, setPizzaValues } = useContext(UserContext);
 
   useEffect(() => {
-    axios
-      .get(API_FOOD)
-      .then((response) => {
+    const fetchPizzaData = async () => {
+      try {
+        const response = await axios.get(API_FOOD);
         setPizzaValues(response.data);
         setCurrentIndexArray(Array(response.data.length).fill(0));
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error(error);
-      });
+      }
+    };
+  
+    fetchPizzaData();
   }, []);
 
   const handleImageChange = (index, cardIndex) => {
