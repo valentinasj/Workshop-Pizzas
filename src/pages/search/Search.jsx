@@ -7,13 +7,17 @@ import FoodSearch from "../../components/foodCard/FoodSearch";
 export const Search = () => {
 
   const [results, setResults] = useState([]);
+  console.log(results.length)
 
   return (
     <>
       <section className="mainSearchBar">
         <SearchBar setResults={setResults}/>
         <main className="mainSearchBar__container">
-          <div className="mainSearchBar__cards">{
+          <div className="mainSearchBar__cards">
+            <span className="mainSearchBar__resultados " >{`${results.length} Resultados`}</span>
+            {
+        
            <FoodSearch results={results}/> }</div>
         </main>
       </section>
