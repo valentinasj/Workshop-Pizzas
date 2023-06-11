@@ -1,18 +1,16 @@
+import React from "react";
+import "./ButtonPrice.scss";
+import { Link } from "react-router-dom";
 
-import React from 'react';
-import './ButtonPrice.scss';
+const ButtonPrice = ({ price, currency, pizzaId }) => {
+    return (
+        <button className="buttonPrice">
+            <Link className="details" to={`/details/${pizzaId}`}>
+                <span className="buttonPrice__price">{price}</span>
+                <span className="buttonPrice__currency">{currency}</span>
+            </Link>
+        </button>
+    );
+};
 
-const ButtonPrice = ({price, currency}) => {
-  return (
-    <button className='buttonPrice'>
-      <span className='buttonPrice__price'>
-        {price}
-        </span>
-        <span className='buttonPrice__currency'>
-        {currency}
-        </span>
-      </button>
-  )
-}
-
-export default ButtonPrice
+export default ButtonPrice;

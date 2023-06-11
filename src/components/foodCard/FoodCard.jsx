@@ -1,38 +1,82 @@
-import React, { useState } from 'react';
-import PizzaOne from '../../imgs/pizza-one.jpg';
-import PizzaTwo from '../../imgs/pizza-two.jpg';
-import PizzaThree from '../../imgs/pizza-three.jpg';
-import './FoodCard.scss';
-import ButtonPrice from '../buttonPrice/ButtonPrice';
+import React, { useEffect, useState, useContext } from "react";
 
-const images = [PizzaOne, PizzaTwo, PizzaThree]; // Agrega aquí todas las imágenes del carrusel
-// const images2 = [PizzaFour, PizzaFive, PizzaSix]; // Agrega aquí todas las imágenes del carrusel
-// const images3 = [PizzaSeven, PizzaEight, PizzaNine]; // Agrega aquí todas las imágenes del carrusel
+import "./FoodCard.scss";
+import ButtonPrice from "../buttonPrice/ButtonPrice";
+import axios from "axios";
+import { UserContext } from "../../routes/AppRouter";
+
+const API_FOOD = "https://pizza-api-production.up.railway.app/pizzas";
 
 const FoodCard = ({ imageUrl }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+    const [currentIndexArray, setCurrentIndexArray] = useState([]);
+    const { pizzaValues, setPizzaValues } = useContext(UserContext);
 
-  const handleImageChange = (index) => {
-    setCurrentIndex(index);
-  };
+    useEffect(() => {
+        axios
+            .get(API_FOOD)
+            .then((response) => {
+                setPizzaValues(response.data);
+                setCurrentIndexArray(Array(response.data.length).fill(0));
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
 
-  return (
-    <section className='foodCard' style={{ backgroundImage: `url(${images[currentIndex]})` }}>
-      <div className='foodCard__info'>
-        <span className='foodCard__title'>Pizza Super especial para FrontEnds</span>
-        <ButtonPrice className='foodCard__price' price={'$99'} currency={'MXN'}></ButtonPrice>
-      </div>
-      <div className="foodCard__dots">
-        {images.map((image, index) => (
-          <span
-            key={index}
-            className={`foodCard__dot ${currentIndex === index ? 'active' : ''}`}
-            onClick={() => handleImageChange(index)}
-          />
-        ))}
-      </div>
-    </section>
-  );
+    const handleImageChange = (index, cardIndex) => {
+        setCurrentIndexArray((prevState) => {
+            const newArray = [...prevState];
+            newArray[cardIndex] = index;
+            return newArray;
+        });
+    };
+
+    return (
+        <section>
+            {pizzaValues.map((pizza, index) => {
+                const images = pizza.imgs;
+
+                return (
+                    <section
+                        className="foodCard"
+                        style={{
+                            backgroundImage: `url(${
+                                images[currentIndexArray[index]]
+                            })`,
+                        }}
+                        key={index}
+                    >
+                        <div className="foodCard__info">
+                            <span className="foodCard__title">
+                                {pizza.name}
+                            </span>
+                            <ButtonPrice
+                                className="foodCard__price"
+                                price={`$${pizza.price}`}
+                                currency={"MXN"}
+                                pizzaId={pizza.id}
+                            ></ButtonPrice>
+                        </div>
+                        <div className="foodCard__dots">
+                            {images.map((image, imageIndex) => (
+                                <span
+                                    key={imageIndex}
+                                    className={`foodCard__dot ${
+                                        currentIndexArray[index] === imageIndex
+                                            ? "active"
+                                            : ""
+                                    }`}
+                                    onClick={() =>
+                                        handleImageChange(imageIndex, index)
+                                    }
+                                />
+                            ))}
+                        </div>
+                    </section>
+                );
+            })}
+        </section>
+    );
 };
 
 export default FoodCard;

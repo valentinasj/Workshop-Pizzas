@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import "./NavBar.scss";
 import {
   faBookOpen,
@@ -10,7 +10,10 @@ import search from "../../imgs/buscar.svg";
 import basket from "../../imgs/basket.svg";
 import { Link } from "react-router-dom";
 
+
 const NavBar = () => {
+
+
   return (
     <nav className="navBar">
         <Link to="/home">
