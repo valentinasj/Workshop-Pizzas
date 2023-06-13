@@ -1,6 +1,6 @@
 .detail--container {
     background-color: var(--primary);
-    height: 100vh;
+    height: 100%;
     position: relative;
 
     .title-back {
@@ -190,7 +190,7 @@
     .pizza-pay {
         padding: 20px 10px;
         display: flex;
-        margin-top: 5%;
+        margin-top: 2%;
         column-gap: 5%;
         justify-content: center;
         background-color: var(--primary);
