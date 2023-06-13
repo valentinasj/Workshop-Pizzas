@@ -22,10 +22,11 @@ const NavBar = () => {
         <span>Home</span>
       </div>
         </Link>
-      
+      <Link to="/payment">
       <div className="navBar__basketContainer">
         <img src={basket} alt="" className="navBar__basket" />
       </div>
+      </Link>
         <Link to="/search">
         <div className="navBar__searchContainer">
             <img src={search} alt="buscar" className="navBar__search" />
