@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, createContext } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Layout } from "../components/layout/Layout";
+import { Login } from "../pages/login/Login";
+import Register from "../pages/registrer/Register";
+import { Search } from "../pages/search/Search";
+import { Details } from "../pages/details/Details";
+import { Cart } from "../pages/cart/Cart";
+import { Paymentpage } from "../pages/paymentpage/Paymentpage";
+import { Home } from "../pages/home/Home";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+export const UserContext = createContext({});
 
-export default App;
+const AppRouter = () => {
+    const [userValues, setUserValues] = useState({});
+    const [pizzaValues, setPizzaValues] = useState([]);
+
+    return (
+        <BrowserRouter>
+            <UserContext.Provider
+                value={{
+                    userValues,
+                    setUserValues,
+                    pizzaValues,
+                    setPizzaValues,
+                }}
+            >
+                <Routes>
+                    <Route path="/" element={<Login />} />
+                    {/* <Route path="login" Component={Login} /> */}
+                    <Route path="register" Component={Register} />
+                    <Route element={<Layout />}>
+                        <Route path="home" Component={Home} />
+                        <Route path="search" Component={Search} />
+                    </Route>
+                    <Route path="details/:id" Component={Details} />
+                    <Route path="cart" Component={Cart} />
+                    <Route path="payment" Component={Paymentpage} />
+                    {/* <Route path="/" element={<Navigate to="/Home" />} /> */}
+                </Routes>
+            </UserContext.Provider>
+        </BrowserRouter>
+    );
+};
+
+export default AppRouter;

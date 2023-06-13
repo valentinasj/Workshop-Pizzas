@@ -1,0 +1,34 @@
+@import '../../index.scss';
+.mainUser{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0px 20px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+   &__title{
+    display: flex;
+    flex-direction: column;
+
+   }
+
+   &__profile{
+    background-color: red;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    img{
+        border-radius: 100%;
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+    }
+   }
+   &__page{
+    font: var(--headline1);
+   }
+   &__userSalute{
+    font: var(--body1-regular);
+    color:var(--grey-2)
+   }
+}
