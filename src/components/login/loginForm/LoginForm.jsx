@@ -35,8 +35,22 @@ const LoginForm = () => {
                         user.password === values.password
                     );
                 });
-
                 if (foundUser) {
+                    const user = response.data.find((user) => {
+                        if (user.username === values.username) {
+                            return user.email;
+                        } else {
+                            return 0;
+                        }
+                    });
+                    delete user.password;
+                    console.log("This is - user = ", user);
+                    localStorage.setItem(
+                        "activeUser",
+                        JSON.stringify({
+                            user: user,
+                        })
+                    );
                     Swal.fire(
                         "Datos correctos!",
                         "Iniciaste sesion correctamente!",

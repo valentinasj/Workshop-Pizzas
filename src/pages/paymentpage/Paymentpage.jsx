@@ -1,4 +1,5 @@
 import "./PayMent.scss";
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import React, { useState } from "react";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
@@ -6,6 +7,9 @@ import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
+
+const api = "https://pizza-api-production.up.railway.app/pucharses";
+
 export const Paymentpage = () => {
     const {
         register,
@@ -17,6 +21,18 @@ export const Paymentpage = () => {
     );
     const [payed, setPayed] = useState(false);
     const onSubmit = (data) => {
+        const forSend = {
+            user: data,
+            pizza: JSON.parse(localStorage.getItem("forPay")),
+        };
+        axios
+            .post(api, forSend)
+            .then((response) => {
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
         setPayed(true);
     };
     function removePizza(deleteP) {
@@ -27,6 +43,20 @@ export const Paymentpage = () => {
         const forPay = JSON.stringify(deleted);
         localStorage.setItem("forPay", forPay);
     }
+    // const payPizza = () => {
+    //     const forSend = {
+    //         user: JSON.parse(localStorage.getItem("activeUser")).user,
+    //         pizza: JSON.parse(localStorage.getItem("forPay")),
+    //     };
+    //     axios
+    //         .post(api, forSend)
+    //         .then((response) => {
+    //             console.log(response.data);
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //         });
+    // };
     return (
         <div className="pay-container">
             {!payed ? (
