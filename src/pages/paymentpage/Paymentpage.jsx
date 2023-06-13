@@ -1,49 +1,42 @@
 import "./PayMent.scss";
-import axios from "axios";
 import { useForm } from "react-hook-form";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
-
-const API_FOOD = "https://pizza-api-production.up.railway.app/pizzas/";
-
 export const Paymentpage = () => {
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
-    const [amount, setAmount] = useState(0);
-    const [price, setPrice] = useState(0);
-    const [pizzaData, setPizzaData] = useState({});
-    const [pizzaImg, setPizzaImg] = useState("");
-    const loc = JSON.parse(localStorage.getItem("forPay"));
+    const [pizzas, setPizzas] = useState(
+        "forPay" in localStorage && JSON.parse(localStorage.getItem("forPay"))
+    );
     const [payed, setPayed] = useState(false);
-    useEffect(() => {
-        setAmount(loc.amount);
-        setPrice(loc.amount * loc.price);
-        axios
-            .get(API_FOOD + loc.id)
-            .then((response) => {
-                setPizzaData(response.data);
-                setPizzaImg(loc.image);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }, []);
     const onSubmit = (data) => {
         setPayed(true);
     };
+    function removePizza(deleteP) {
+        let deleted = pizzas.filter((obj, index) => {
+            return index !== parseInt(deleteP);
+        });
+        setPizzas(deleted);
+        const forPay = JSON.stringify(deleted);
+        localStorage.setItem("forPay", forPay);
+    }
     return (
         <div className="pay-container">
             {!payed ? (
                 <>
                     <p className="title-back">
                         {" "}
-                        <Link className="go-back" to={`/details/${loc.id}`}>
+                        <Link
+                            to={"/details/" + localStorage.getItem("lastPizza")}
+                            className="go-back"
+                        >
                             <FontAwesomeIcon
                                 className="icon"
                                 icon={faChevronLeft}
@@ -51,20 +44,39 @@ export const Paymentpage = () => {
                         </Link>
                         Carrito de compras
                     </p>
-                    <div className="info-card">
-                        <img
-                            className="image"
-                            src={pizzaImg}
-                            alt="Deliciosa Pizza"
-                        />
-                        <div className="data">
-                            <p>{pizzaData.name}</p>
-                            <div className="info">
-                                <p>X{amount}</p>
-                                <p>${price}</p>
+                    {pizzas.map((pizza, i) => {
+                        return (
+                            <div key={i} className="info-card">
+                                <img
+                                    className="image"
+                                    src={pizza.image}
+                                    alt="Deliciosa Pizza"
+                                />
+                                <div className="data">
+                                    <p className="pizza-name">
+                                        {pizza.name}
+                                        <button
+                                            onClick={() => {
+                                                removePizza(i);
+                                            }}
+                                            className="remove-item"
+                                        >
+                                            <FontAwesomeIcon
+                                                className="icon"
+                                                icon={faTrashCan}
+                                            />{" "}
+                                        </button>
+                                    </p>
+                                    <div className="info">
+                                        <p>X{pizza.amount}</p>
+                                        <p className="amount">
+                                            ${pizza.price * pizza.amount}
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        );
+                    })}
                     <div className="pay-form">
                         <p className="title">Información de pago</p>
                         <form
@@ -137,7 +149,34 @@ export const Paymentpage = () => {
                                     {...register("address", { required: true })}
                                 />
                             </div>
-                            <input type="submit" />
+                            {pizzas.length > 0 ? (
+                                <input type="submit" />
+                            ) : (
+                                <>
+                                    <Player
+                                        autoplay
+                                        loop
+                                        src="https://assets2.lottiefiles.com/packages/lf20_WpDG3calyJ.json"
+                                        style={{
+                                            height: "200px",
+                                            width: "200px",
+                                        }}
+                                    >
+                                        <Controls
+                                            visible={false}
+                                            buttons={[
+                                                "play",
+                                                "repeat",
+                                                "frame",
+                                                "debug",
+                                            ]}
+                                        />
+                                    </Player>
+                                    <h5 className="no-pizzas">
+                                        Selecciona Las Pizzas Que Deseas Comprar
+                                    </h5>
+                                </>
+                            )}
                         </form>
                     </div>
                 </>
@@ -156,7 +195,10 @@ export const Paymentpage = () => {
                     </Player>
                     <h5>Tu pedido está en proceso</h5>
                     <p>Serás notificado cuando llegue el repartidor</p>
-                    <button className="accept-btn">
+                    <button
+                        onClick={localStorage.removeItem("forPay")}
+                        className="accept-btn"
+                    >
                         <Link to={"/home"}>ACEPTAR</Link>
                     </button>
                 </div>

@@ -1,13 +1,18 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Details.scss";
-import { faStar, faBasketShopping } from "@fortawesome/free-solid-svg-icons";
+import {
+    faStar,
+    faBasketShopping,
+    faChevronLeft,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import profile from "../../imgs/profile.png";
+import Swal from "sweetalert2";
 
 const API_FOOD = "https://pizza-api-production.up.railway.app/pizzas/";
 
@@ -16,6 +21,12 @@ export const Details = () => {
     const currency = "MXN";
     const [pizzaData, setPizzaData] = useState({});
     const [pizzasCount, setPizzasCount] = useState(1);
+    const [cart, setCart] = useState(
+        "forPay" in localStorage
+            ? JSON.parse(localStorage.getItem("forPay"))
+            : []
+    );
+    const navigate = useNavigate();
     useEffect(() => {
         axios
             .get(API_FOOD + id)
@@ -29,7 +40,7 @@ export const Details = () => {
     var settings = {
         dots: true,
         infinite: true,
-        speed: 500,
+        speed: 300,
         slidesToShow: 1,
         slidesToScroll: 1,
     };
@@ -37,27 +48,124 @@ export const Details = () => {
         if (txt === "add") {
             setPizzasCount(pizzasCount + 1);
         } else {
-            if (pizzasCount > 0) {
+            if (pizzasCount > 1) {
                 setPizzasCount(pizzasCount - 1);
             }
         }
     }
-    function saveData() {
-        const forPay = JSON.stringify({
-            amount: pizzasCount,
-            price: pizzaData.price,
-            id: id,
-            image: pizzaData.imgs[0],
-        });
-        localStorage.setItem("forPay", forPay);
+    function saveData(butt) {
+        localStorage.setItem("lastPizza", id);
+        if (butt === "pay") {
+            if (
+                "forPay" in localStorage === false ||
+                JSON.parse(localStorage.getItem("forPay")).length <= 0
+            ) {
+                const forPay = JSON.stringify([
+                    {
+                        amount: pizzasCount,
+                        price: pizzaData.price,
+                        id: id,
+                        image: pizzaData.imgs[0],
+                        name: pizzaData.name,
+                    },
+                ]);
+                localStorage.setItem("forPay", forPay);
+                navigate("/payment");
+            } else {
+                navigate("/payment");
+            }
+        } else if (butt === "basket") {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener("mouseenter", Swal.stopTimer);
+                    toast.addEventListener("mouseleave", Swal.resumeTimer);
+                },
+            });
+            Toast.fire({
+                icon: "success",
+                title: pizzasCount <= 1 ? "Pizza Añadida" : "Pizzas Añadidas",
+            });
+            if ("forPay" in localStorage === false) {
+                setCart([
+                    {
+                        amount: pizzasCount,
+                        price: pizzaData.price,
+                        id: id,
+                        image: pizzaData.imgs[0],
+                        name: pizzaData.name,
+                    },
+                ]);
+                const forPay = JSON.stringify([
+                    {
+                        amount: pizzasCount,
+                        price: pizzaData.price,
+                        id: id,
+                        image: pizzaData.imgs[0],
+                        name: pizzaData.name,
+                    },
+                ]);
+                localStorage.setItem("forPay", forPay);
+            } else {
+                const i = JSON.parse(localStorage.getItem("forPay")).findIndex(
+                    (objeto) => objeto.id === id.toString()
+                );
+                if (i === -1) {
+                    setCart([
+                        ...cart,
+                        {
+                            amount: pizzasCount,
+                            price: pizzaData.price,
+                            id: id,
+                            image: pizzaData.imgs[0],
+                            name: pizzaData.name,
+                        },
+                    ]);
+                    const save = JSON.parse(localStorage.getItem("forPay"));
+                    save.push({
+                        amount: pizzasCount,
+                        price: pizzaData.price,
+                        id: id,
+                        image: pizzaData.imgs[0],
+                        name: pizzaData.name,
+                    });
+                    const forPay = JSON.stringify(save);
+                    localStorage.setItem("forPay", forPay);
+                } else {
+                    const save = cart;
+                    save[i].amount += pizzasCount;
+                    const forPay = JSON.stringify(save);
+                    localStorage.setItem("forPay", forPay);
+                    setCart(save);
+                }
+            }
+        }
     }
     return (
         <div className="detail--container">
+            <p className="title-back">
+                {" "}
+                <Link className="go-back" to={"/home"}>
+                    <FontAwesomeIcon className="icon" icon={faChevronLeft} />{" "}
+                </Link>
+                Todas Las Pizzas
+            </p>
             <Slider {...settings}>
                 {pizzaData.imgs &&
                     pizzaData.imgs.map((img) => {
                         return (
-                            <img className="carousel-img" src={img} alt="" />
+                            <div className="imgs-cont">
+                                <div className="fade"></div>
+                                <img
+                                    className="carousel-img"
+                                    src={img}
+                                    alt=""
+                                />
+                            </div>
                         );
                     })}
             </Slider>
@@ -118,13 +226,25 @@ export const Details = () => {
                     </button>
                 </div>
                 <div className="buttons-pay">
-                    <button onClick={saveData} className="basket buy-but">
-                        <Link to="/payment">
-                            <FontAwesomeIcon
-                                className="icon"
-                                icon={faBasketShopping}
-                            />
-                        </Link>
+                    <button
+                        onClick={() => {
+                            saveData("basket");
+                        }}
+                        className="basket buy-but"
+                    >
+                        <FontAwesomeIcon
+                            className="icon"
+                            icon={faBasketShopping}
+                        />
+                        Añadir
+                    </button>
+                    <button
+                        onClick={() => {
+                            saveData("pay");
+                        }}
+                        className="pay buy-but"
+                    >
+                        Pagar
                     </button>
                 </div>
             </div>

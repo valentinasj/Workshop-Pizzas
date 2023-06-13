@@ -27,7 +27,7 @@
 
         .image {
             height: 100px;
-            width: 80px;
+            width: 30%;
             object-fit: cover;
             border-radius: 10px;
         }
@@ -38,11 +38,37 @@
             row-gap: 60%;
             font-size: 17px;
             font-weight: 500;
+            width: 70%;
+
+            .pizza-name {
+                position: relative;
+
+                .remove-item {
+                    background-color: transparent;
+                    border: none;
+                    font-size: 20px;
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-35%);
+                    color: var(--primary);
+                    filter: drop-shadow(0 0 1px var(--primary));
+                    right: 2%;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
 
             .info {
                 display: flex;
-                column-gap: 100%;
+                column-gap: 60%;
                 font-weight: 700;
+
+                .amount {
+                    text-align: end;
+                    width: 100%;
+                }
             }
         }
     }
@@ -116,6 +142,11 @@
                 font-size: 15px;
                 color: rgba(245, 23, 23, 0.769);
             }
+        }
+
+        .no-pizzas {
+            text-align: center;
+            box-shadow: 0px 12px 20px -20px #000000a5;
         }
 
         .double {
