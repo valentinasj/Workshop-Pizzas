@@ -1,0 +1,70 @@
+@import "../../index.scss";
+
+.mainHome {
+  margin: 0px 20px;
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+  }
+
+  &__pizzas {
+    display: flex;
+    gap: 50px;
+    font: var(--body1-bold);
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &__coupons {
+    display: flex;
+    justify-content: center;
+    font: var(--body2-bold);
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    margin-bottom: 10px;
+
+    .coupon {
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      animation: slide 10s linear infinite;
+      margin-right: 20px;
+      // Agrega aquí los estilos adicionales para los cupones
+    }
+  }
+
+  &__foodCards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+  }
+}
+
+.seeAll {
+  font: var(--body1-bold);
+  color: var(--primary);
+}
+
+.foodCards__container {
+  overflow-y: auto; /* Enable vertical scrolling */
+  scroll-behavior: smooth; /* Add smooth scrolling animation */
+  max-height: 80vh; /* Set the desired maximum height for the container */
+}
+
+.foodCard {
+  width: 90vw; /* Set the width of each FoodCard component to fill the container */
+  margin-bottom: 10px; /* Add spacing between the cards */
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

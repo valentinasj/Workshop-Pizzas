@@ -1,0 +1,50 @@
+@import '../../index.scss';
+.coupon {
+    position: relative;
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+    border: 2px dashed  var(--white);
+    background-color: var(--primary);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  
+    .coupon__tag {
+      position: absolute;
+      left: -27%;
+      bottom: 35%;
+      width: 70%;
+      transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+      -webkit-transform: rotate(-90deg);
+      font-size: 0.65em;
+      text-align: center;
+      font-family: Helvetica;
+      color: #ffffff;
+    }
+   
+   .coupon__body {
+      margin-left: 30px;
+      padding: 10px;
+      border-left: 1px dotted #f9f9f9;
+      
+      .coupon__title, .coupon__value {
+        text-align: center;
+      }
+      
+      .coupon__title {
+        font-family: Helvetica;
+        font-size: 1em;
+        // text-shadow: 1px 1px 0 rgb(23, 23, 23);
+        color: #ffffff;
+       }
+      
+      .coupon__value {
+        font-family: var(--body1-bold);
+        font-size: 2em;
+        color: white;
+        // text-shadow: 2px 2px 0 #fa5b7d;
+       }
+     }
+  }
