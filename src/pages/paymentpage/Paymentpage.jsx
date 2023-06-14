@@ -116,7 +116,7 @@ export const Paymentpage = () => {
                             <div className="each-inp">
                                 <label htmlFor="name"> Nombre completo</label>
                                 {errors.name && (
-                                    <span>This field is required</span>
+                                    <span>Este campo es requerido</span>
                                 )}
                                 <input
                                     autoComplete="off"
@@ -130,7 +130,7 @@ export const Paymentpage = () => {
                                     Número de Tarjeta de Crédito
                                 </label>
                                 {errors.card && (
-                                    <span>This field is required</span>
+                                    <span>Este campo es requerido</span>
                                 )}
                                 <input
                                     placeholder="1234 1234 1234 1234"
@@ -144,7 +144,7 @@ export const Paymentpage = () => {
                                         Fecha de vencimiento
                                     </label>
                                     {errors.date && (
-                                        <span>This field is required</span>
+                                        <span>Este campo es requerido</span>
                                     )}
                                     <input
                                         placeholder="MM/YY"
@@ -157,7 +157,7 @@ export const Paymentpage = () => {
                                 <div className="each-inp right">
                                     <label htmlFor="code">CVV</label>
                                     {errors.code && (
-                                        <span>This field is required</span>
+                                        <span>Este campo es requerido</span>
                                     )}
                                     <input
                                         placeholder="***"
@@ -171,7 +171,7 @@ export const Paymentpage = () => {
                             <div className="each-inp">
                                 <label htmlFor="address">Dirección</label>
                                 {errors.address && (
-                                    <span>This field is required</span>
+                                    <span>Este campo es requerido</span>
                                 )}
                                 <input
                                     placeholder="Av.morelos #123"

@@ -32,8 +32,8 @@ const RegisterForm = () => {
             .post(API_USER, values)
             .then((response) => {
                 setUserValues(values);
-                // Aquí puedes realizar acciones adicionales después de registrar el usuario
-                navigate("/home"); // Ejemplo: redirigir a una página de éxito
+                
+                navigate("/home"); 
             })
             .catch((error) => {
                 // Manejar el error aquí

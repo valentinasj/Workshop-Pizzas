@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import ButtonPrice from '../buttonPrice/ButtonPrice';
 
-const FoodSearch = ({results}) => {
+const FoodSearchCard = ({results}) => {
   const [currentIndexArray, setCurrentIndexArray] = useState(
     Array(results.length).fill(0)
   );
@@ -55,4 +55,4 @@ const FoodSearch = ({results}) => {
   )
 }
 
-export default FoodSearch
+export default FoodSearchCard

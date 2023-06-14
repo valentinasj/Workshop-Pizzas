@@ -5,15 +5,15 @@ import { UserContext } from "../../routes/AppRouter";
 
 const UserInfo = () => {
     const { userValues } = useContext(UserContext);
-    const [user, setUser] = useState(
-        JSON.parse(localStorage.getItem("activeUser"))
-    );
+    // const [user, setUser] = useState(
+    //     JSON.parse(localStorage.getItem("activeUser"))
+    // );
     return (
         <div className="mainUser">
             <div className="mainUser__title">
                 <h5 className="mainUser__page">Home</h5>
                 <span className="mainUser__userSalute">
-                    Que bueno verte {user.user.username}!
+                    Que bueno verte {userValues.username}!
                 </span>
             </div>
             <div className="mainUser__profile">

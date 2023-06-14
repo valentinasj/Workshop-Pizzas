@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import logo from "../../imgs/logo.png";
 import "./Search.scss";
 import SearchBar from "../../components/searchBar/SearchBar";
-import FoodSearch from "../../components/foodCard/FoodSearch";
+import FoodSearchCard from "../../components/foodCard/FoodSearchCard";
+
 
 export const Search = () => {
 
   const [results, setResults] = useState([]);
-  console.log(results.length)
 
   return (
     <>
@@ -18,7 +18,7 @@ export const Search = () => {
             <span className="mainSearchBar__resultados " >{`${results.length} Resultados`}</span>
             {
         
-           <FoodSearch results={results}/> }</div>
+           <FoodSearchCard results={results}/> }</div>
         </main>
       </section>
       <div className="mainSearch">
